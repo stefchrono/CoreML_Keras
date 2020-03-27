@@ -1,22 +1,21 @@
-from __future__ import print_function
 import keras
 from keras.datasets import mnist
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 from keras import backend as K
+from keras.layers import Dense, Dropout, Flatten
 from keras.models import load_model
 from keras.models import model_from_json
 import coremltools
 
-batch_size = 128
 num_classes = 10
-epochs = 2
+epochs = 6
+batch_size = 128
 
-# input image dimensions
+
 img_rows, img_cols = 28, 28
 
-# the data, split between train and test sets
+
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 
@@ -36,12 +35,7 @@ x_test = x_test.astype('float32')
 x_train = x_train / 255
 x_test = x_test / 255
 
-print('x_train shape: ', x_train.shape)
-print(x_train.shape[0], 'train samples')
-print(x_test.shape[0], 'test samples')
 
-
-# convert class vectors to binary class matrices
 y_train = keras.utils.to_categorical(y_train, num_classes)
 y_test = keras.utils.to_categorical(y_test, num_classes)
 
@@ -63,4 +57,4 @@ score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss: ', score[0])
 print('Test accuracy: ', score[1])
 
-model.save('/Users/StefChrono/Desktop/Keras_Models/Digit_Recognizer.h5')
+model.save('/path/to/Digit_Recognizer.h5')
